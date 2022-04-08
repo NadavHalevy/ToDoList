@@ -1,15 +1,14 @@
 package com.example.nadavhalevy.todolist;
 
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         item = findViewById(R.id.editText);
         add = findViewById(R.id.button);
-        list = findViewById(R.id.list);
+        list = (ListView) findViewById(R.id.list);
 
         itemList = FileHelper.readData(this);
 
@@ -39,17 +38,34 @@ public class MainActivity extends AppCompatActivity {
         add.setOnClickListener(view -> {
 
             String itemName = item.getText().toString();
-            itemList.add(itemName);
-            Log.d("message", itemName);
-            arrayAdapter.notifyDataSetChanged();
-            FileHelper.writeData(itemList, getApplicationContext());
-            item.setText("");
-            list.setAdapter(arrayAdapter);
-            for (int i = 0; i < arrayAdapter.getCount() ; i++) {
-                Log.d("arraylist", arrayAdapter.getItem(i));
+            if(item == null){
+                Toast.makeText(getApplicationContext(), "An empty task cannot be added", Toast.LENGTH_LONG).show();
+            }else{
+                itemList.add(itemName);
+                Log.d("message", itemName);
+                arrayAdapter.notifyDataSetChanged();
+                FileHelper.writeData(itemList, getApplicationContext());
+                item.setText("");
+                list.setAdapter(arrayAdapter);
             }
+                Log.d("arraylist", arrayAdapter.getItem(arrayAdapter.getCount() - 1));
+        });
 
+        list.setOnItemClickListener((adapterView, view, position, id) -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+            alert.setTitle("Delete");
+            alert.setMessage("Do you want to delete this item from the list?");
+            alert.setCancelable(false);
+            alert.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
+            alert.setPositiveButton("Yes", (dialogInterface, i) -> {
 
+                itemList.remove(position);
+                arrayAdapter.notifyDataSetChanged();
+                FileHelper.writeData(itemList, getApplicationContext());
+            });
+
+            AlertDialog alertDialog = alert.create();
+            alertDialog.show();
         });
     }
 
