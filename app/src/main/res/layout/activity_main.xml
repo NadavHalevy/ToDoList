@@ -41,7 +41,8 @@
         android:layout_height="match_parent"
         android:cacheColorHint="@color/black"
         android:contextClickable="true"
-        android:divider="?android:dividerHorizontal">
+        android:divider="?android:dividerHorizontal"
+        tools:listitem="@android:layout/simple_expandable_list_item_1">
 
     </ListView>
 

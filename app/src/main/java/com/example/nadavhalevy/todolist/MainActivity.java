@@ -53,13 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
         list.setOnItemClickListener((adapterView, view, position, id) -> {
             AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-            alert.setTitle("Delete");
-            alert.setMessage("Do you want to delete this item from the list?");
+            alert.setTitle( getApplicationContext().getString(R.string.delete));
+            alert.setMessage(getApplicationContext().getString(R.string.if_youre_done));
             alert.setCancelable(false);
             alert.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
             alert.setPositiveButton("Yes", (dialogInterface, i) -> {
 
                 itemList.remove(position);
+                Toast.makeText(getApplicationContext(),
+                        getApplicationContext().getString(R.string.well_done),
+                                Toast.LENGTH_LONG).show();
                 arrayAdapter.notifyDataSetChanged();
                 FileHelper.writeData(itemList, getApplicationContext());
             });

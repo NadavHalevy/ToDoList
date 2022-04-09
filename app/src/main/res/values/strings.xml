@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">ToDo List</string>
-    <string name="label">דף משימות</string>
+    <string name="label">רשימת משימות</string>
     <string name="add">הוסף</string>
     <string name="add_task">הוסף משימה</string>
+    <string name="delete">האם למחוק?</string>
+    <string name="if_youre_done">האם סיימת את המשימה וניתן למחוק אותה מהרשימה?</string>
+    <string name="well_done">איזה כיף, משימה אחת ירדה מהפרק - קדימה למשימות הבאות!</string>
 </resources>
