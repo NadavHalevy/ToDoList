@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class FileHelper {
 
     public static final String FILENAME = "listinfo.dat";
+    public static final String FILENAME2 = "listinfo2.dat";
+
 
     public static void writeData(ArrayList<String> item, Context context) {
 
@@ -26,6 +28,8 @@ public class FileHelper {
             e.printStackTrace();
         }
     }
+
+
 
     public static ArrayList<String> readData(Context context) {
 

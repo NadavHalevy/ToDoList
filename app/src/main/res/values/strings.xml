@@ -5,5 +5,11 @@
     <string name="add_task">הוסף משימה</string>
     <string name="delete">האם למחוק?</string>
     <string name="if_youre_done">האם סיימת את המשימה וניתן למחוק אותה מהרשימה?</string>
+    <string name="if_youre_done_all">האם סיימת את כל המשימות וניתן למחוק אותן מהרשימה?</string>
     <string name="well_done">איזה כיף, משימה אחת ירדה מהפרק - קדימה למשימות הבאות!</string>
+    <string name="task_to_do">משימות ממתינות לביצוע</string>
+    <string name="task_done">משימות שבוצעו</string>
+    <string name="delete_all">למחוק הכל</string>
+    <string name="well_done_all_done">איזה כיף,כל המשימות נגמור לעת עתה!</string>
+    <string name="list_empty">אין משימות לבצע ולכן אין מה למחוק..</string>
 </resources>
