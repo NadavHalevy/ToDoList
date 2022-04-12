@@ -21,7 +21,6 @@
             android:hint="@string/add_task"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:textColorHint="#000000"
             tools:ignore="LabelFor" />
 
         <Button
@@ -50,8 +49,9 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_gravity="top"
+            android:layout_margin="5dp"
             android:cacheColorHint="@color/black"
             android:contextClickable="true"
             android:divider="?android:dividerHorizontal"
@@ -71,20 +71,22 @@
             android:text="@string/task_done"
             android:textSize="24dp" />
 
+        <ListView
+            android:id="@+id/listDone"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="5dp"
+            android:layout_weight="4"
+            android:background="@android:color/holo_green_dark">
+
+        </ListView>
+
         <Button
             android:id="@+id/button_delete_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/delete_all" />
 
-        <ListView
-            android:id="@+id/listDone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:background="@android:color/holo_green_dark">
-
-        </ListView>
     </LinearLayout>
 
 </LinearLayout>

@@ -12,13 +12,20 @@ import java.util.ArrayList;
 public class FileHelper {
 
     public static final String FILENAME = "listinfo.dat";
-    public static final String FILENAME2 = "listinfo2.dat";
+    public static final String FILENAMEDONE = "listinfodone.dat";
 
 
-    public static void writeData(ArrayList<String> item, Context context) {
+    public static void writeData(ArrayList<String> item, Context context, int toDo_orDone) {
 
+        String check = "";
+        if (toDo_orDone == 1) {
+            check = FILENAME;
+        } else {
+            check = FILENAMEDONE;
+
+        }
         try {
-            FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput(check, Context.MODE_PRIVATE);
             ObjectOutputStream oas = new ObjectOutputStream(fos);
             oas.writeObject(item);
             oas.close();
@@ -29,13 +36,17 @@ public class FileHelper {
         }
     }
 
+    public static ArrayList<String> readData(Context context, int toDo_orDone) {
 
-
-    public static ArrayList<String> readData(Context context) {
-
+        String check = "";
+        if (toDo_orDone == 1) {
+            check = FILENAME;
+        } else {
+            check = FILENAMEDONE;
+        }
         ArrayList<String> itemList = null;
         try {
-            FileInputStream fis = context.openFileInput(FILENAME);
+            FileInputStream fis = context.openFileInput(check);
             ObjectInputStream ois = new ObjectInputStream(fis);
             itemList = (ArrayList<String>) ois.readObject();
         } catch (FileNotFoundException e) {
@@ -51,4 +62,6 @@ public class FileHelper {
         return itemList;
 
     }
+
 }
+

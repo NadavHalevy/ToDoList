@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     EditText item;
-    Button add, deletAllButton;
+    Button add, deleteAllButton;
     ListView list, listDone;
     ArrayList<String> itemList = new ArrayList<>();
     ArrayList<String> itemListDone = new ArrayList<>();
@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
         item = findViewById(R.id.editText);
         add = findViewById(R.id.button);
-        deletAllButton = findViewById(R.id.button_delete_all);
+        deleteAllButton = findViewById(R.id.button_delete_all);
         list = (ListView) findViewById(R.id.list);
         listDone = (ListView) findViewById(R.id.listDone);
 
-        itemList = FileHelper.readData(this);
-        itemListDone =  FileHelper.readData(this);
+        itemList = FileHelper.readData(this, 1);
+        itemListDone =  FileHelper.readData(this, 2);
 
         arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemList);
-        arrayAdapterDone  = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, itemListDone);
+        arrayAdapterDone  = new ArrayAdapter<>(this, android.R.layout.simple_list_item_2, android.R.id.text2, itemListDone);
 
         list.setAdapter(arrayAdapter);
         listDone.setAdapter(arrayAdapterDone);
@@ -50,14 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 itemList.add(itemName);
                 Log.d("message", itemName);
                 arrayAdapter.notifyDataSetChanged();
-                FileHelper.writeData(itemList, getApplicationContext());
+                FileHelper.writeData(itemList, getApplicationContext(), 1);
                 item.setText("");
                 list.setAdapter(arrayAdapter);
             }
                 Log.d("arraylist", arrayAdapter.getItem(arrayAdapter.getCount() - 1));
         });
 
-        deletAllButton.setOnClickListener(view -> {
+        deleteAllButton.setOnClickListener(view -> {
             if ( arrayAdapterDone.isEmpty()) {
                 Toast.makeText(getApplicationContext(),
                         getApplicationContext().getString(R.string.list_empty),
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                             getApplicationContext().getString(R.string.well_done_all_done),
                             Toast.LENGTH_LONG).show();
                     arrayAdapterDone.notifyDataSetChanged();
-                    FileHelper.writeData(itemListDone, getApplicationContext());
                 });
 
                 AlertDialog alertDialog = alert.create();
@@ -89,10 +88,11 @@ public class MainActivity extends AppCompatActivity {
             itemListDone.add(itemList.get(position));
             Log.d("message", itemList.get(position));
             arrayAdapter.notifyDataSetChanged();
-            FileHelper.writeData(itemListDone, getApplicationContext());
+            FileHelper.writeData(itemListDone, getApplicationContext(), 2);
             item.setText("");
             listDone.setAdapter(arrayAdapterDone);
             itemList.remove(position);
+            list.setAdapter(arrayAdapter);
 
 
         });
@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
                 itemListDone.remove(position);
                 Toast.makeText(getApplicationContext(),
                         getApplicationContext().getString(R.string.well_done),
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
                 arrayAdapterDone.notifyDataSetChanged();
-                FileHelper.writeData(itemListDone, getApplicationContext());
+                FileHelper.writeData(itemListDone, getApplicationContext(), 2);
             });
 
             AlertDialog alertDialog = alert.create();
@@ -119,4 +119,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        helperFunction();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        helperFunction();
+
+    }
+
+    private void helperFunction(){
+
+        FileHelper.writeData(itemList, getApplicationContext(), 1);
+        FileHelper.writeData(itemListDone, getApplicationContext(), 2);
+
+        list.setAdapter(arrayAdapter);
+        listDone.setAdapter(arrayAdapterDone);
+    }
 }
