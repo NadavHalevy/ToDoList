@@ -3,7 +3,6 @@ package com.example.nadavhalevy.todolist;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,13 +47,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "An empty task cannot be added", Toast.LENGTH_LONG).show();
             }else{
                 itemList.add(itemName);
-                Log.d("message", itemName);
                 arrayAdapter.notifyDataSetChanged();
                 FileHelper.writeData(itemList, getApplicationContext(), 1);
                 item.setText("");
                 list.setAdapter(arrayAdapter);
             }
-                Log.d("arraylist", arrayAdapter.getItem(arrayAdapter.getCount() - 1));
         });
 
         deleteAllButton.setOnClickListener(view -> {
@@ -86,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener((adapterView, view, position, id) -> {
 
             itemListDone.add(itemList.get(position));
-            Log.d("message", itemList.get(position));
             arrayAdapter.notifyDataSetChanged();
             FileHelper.writeData(itemListDone, getApplicationContext(), 2);
             item.setText("");

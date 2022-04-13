@@ -49,7 +49,7 @@
         <ListView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:layout_gravity="top"
             android:layout_margin="5dp"
             android:cacheColorHint="@color/black"
@@ -74,9 +74,8 @@
         <ListView
             android:id="@+id/listDone"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="250dp"
             android:layout_margin="5dp"
-            android:layout_weight="4"
             android:background="@android:color/holo_green_dark">
 
         </ListView>
