@@ -1,4 +1,4 @@
-package com.example.nadavhalevy.todolist;
+package com.company.nadavhalevy.todolist;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

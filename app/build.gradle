@@ -6,11 +6,11 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.nadavhalevy.todolist"
+        applicationId "com.company.nadavhalevy.todolist"
         minSdk 24
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
